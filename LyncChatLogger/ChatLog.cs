@@ -45,6 +45,9 @@ namespace LyncChatLogger
 
 			using (var writer = new StreamWriter(path, true))
 			{
+				if (!text.EndsWith(Environment.NewLine))
+					text += Environment.NewLine;
+
 				writer.Write("[{0} {1}] {2}: {3}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), username, text);
 			}
 		}
