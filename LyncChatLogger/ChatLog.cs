@@ -59,8 +59,17 @@ namespace LyncChatLogger
 			if (!Directory.Exists(path))
 				Directory.CreateDirectory(path);
 
-			Participant participant = LyncHelper.GetConversationParticipant(messageInfo.Conversation);
-			string username = LyncHelper.GetContactUsername(participant.Contact);
+			string username;
+
+			if (messageInfo.Conversation.Participants.Count > 2)
+			{
+				username = "_group-chats";
+			}
+			else
+			{
+				Participant participant = LyncHelper.GetConversationParticipant(messageInfo.Conversation);
+				username = LyncHelper.GetContactUsername(participant.Contact);
+			}
 
 			path += "/" + username;
 

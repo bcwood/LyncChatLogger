@@ -43,11 +43,10 @@ namespace LyncChatLogger
 
 		public static Participant GetConversationParticipant(Conversation conversation)
 		{
-			// get first particpant in chat that is not yourself
-			// TODO: return multiple participants in group chat
+			// get other particpant in chat
 			return (from Participant p in conversation.Participants
 					where p != conversation.SelfParticipant
-					select p).FirstOrDefault();
+					select p).SingleOrDefault();
 		}
 
 		public static LyncClient GetLyncClient()
